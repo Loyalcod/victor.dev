@@ -14,7 +14,7 @@
                     </a>
                 @endforeach
             </div>
-            <p class="mt-6 max-w-2xl text-lg leading-8 text-on-surface-variant">Senior Frontend & Full-stack Engineer building scalable interfaces, robust backend flows, and sharp digital products.</p>
+            <p class="mt-6 max-w-2xl text-lg leading-8 text-on-surface-variant">Full-stack Engineer building scalable web and mobile applications with React, Next.js, Laravel, React Native, and cloud deployment technologies - focused on creating fast, modern, and impactful digital experiences.</p>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href="{{ route('projects') }}" class="rounded-lg bg-primary-container px-6 py-3 text-center font-bold text-on-primary">View Projects</a>
                 <a href="{{ route('contact') }}" class="rounded-lg border border-outline-variant px-6 py-3 text-center font-bold text-on-surface transition hover:bg-white/5">Send Message</a>
