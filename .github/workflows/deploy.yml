@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -25,16 +22,19 @@ jobs:
           ssh -i ~/.ssh/deploy_key -p 22 citi360@148.230.122.109 << 'EOF'
             set -e
 
-            cd ${{ secrets.PROJECT_PATH }}
+            PROJECT_PATH="/home/citi360/victor.dev"
+            PUBLIC_HTML="/home/citi360/web/victor.citizensnewscn.com/public_html"
 
-            git pull origin main
+            if [ ! -d "$PROJECT_PATH/.git" ]; then
+              git clone git@github.com:${{ github.repository }}.git "$PROJECT_PATH"
+            fi
+
+            cd "$PROJECT_PATH"
+
+            git fetch origin main
+            git reset --hard origin/main
 
             composer install --no-dev --optimize-autoloader --no-interaction
-
-            if [ ! -f vendor/autoload.php ]; then
-              echo "Composer vendor folder was not created. Deployment stopped."
-              exit 1
-            fi
 
             if [ -f package.json ]; then
               npm install
@@ -57,4 +57,10 @@ jobs:
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
+
+            rm -rf "$PUBLIC_HTML"/*
+            rsync -av "$PROJECT_PATH/public/" "$PUBLIC_HTML/"
+
+            sed -i "s|__DIR__.'/../vendor/autoload.php'|__DIR__.'/../../../victor.dev/vendor/autoload.php'|g" "$PUBLIC_HTML/index.php"
+            sed -i "s|__DIR__.'/../bootstrap/app.php'|__DIR__.'/../../../victor.dev/bootstrap/app.php'|g" "$PUBLIC_HTML/index.php"
           EOF
