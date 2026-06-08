@@ -14,6 +14,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Akujuobi Victor Chibuike professional frontend and full-stack engineering portfolio.">
+    <meta property="og:title" content="{{ $title ?? 'VICTOR.DEV' }} | VICTOR.DEV">
+    <meta property="og:description" content="Akujuobi Victor Chibuike professional frontend and full-stack engineering portfolio.">
+    <meta property="og:image" content="{{ asset('images/hero-portrait.jpeg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="VICTOR.DEV">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title ?? 'VICTOR.DEV' }} | VICTOR.DEV">
+    <meta name="twitter:description" content="Akujuobi Victor Chibuike professional frontend and full-stack engineering portfolio.">
+    <meta name="twitter:image" content="{{ asset('images/hero-portrait.jpeg') }}">
     <title>{{ $title ?? 'VICTOR.DEV' }} | VICTOR.DEV</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
